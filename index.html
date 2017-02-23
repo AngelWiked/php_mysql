@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css">
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+	<script type="text/javascript">
+		$("document").ready(function (){
+			$("#btnGuardar").click(function(){
+				var nom=$("#nomServ").val();
+				var dir=$("#direccion").val();
+				var rfc=$("#rfc").val();
+				var tel=$("#telefono").val();
+				var clsif=$("#clasificacion").val();
+				var foto="img/fotos/foto.jpg";
+				var lat=$("#latitud").val();
+				var longit=$("#longitud").val();
+				//alert("Funciona");
+				$.ajax({
+					type:"POST",
+					url:"Guardar.php",
+					data:"Nom="+nom+"&Dir="+dir+"&RFC="+rfc+"&Tel="+tel+"&Clas="+clsif+"&Foto="+foto+"&Lat="+lat+"&Long="+longit,
+					success:function respuesta(datos){
+							 	alert(datos);
+							}
+				});
+			});	
+		});
+	</script>
+	<style type="text/css">
+		p{
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div data-role="page" id="Principal">
+		<div data-role="header">
+			<p>Servicios Libres</p>
+		</div>	
+		<div data-role="content">
+			<ul data-role="listview">
+				<li><a href="#Registrar" data-transition="flip">Registrar Servicios</a></li>
+				<li><a href="#Consultar">Consultar Servicios</a></li>
+				<li><a href="#Eliminar">Elminar Servicios</a></li>
+				<li><a href="#Actualizar">Actualizar Servicios</a></li>
+			</ul>	
+		</div>
+		<div data-role="footer">
+			<p>pie de aplicación</p>
+		</div>
+	</div>	
+	<div data-role="page" id="Registrar">
+		<div data-role="header">
+			<p>Registro de servicios</p>
+		</div>	
+		<div data-role="content">
+			<input type="text" id="nomServ" placeholder="Escribe el nombre del servicio">
+			<input type="text" id="direccion" placeholder="Escribe la dirección">
+			<input type="text" id="rfc" placeholder="Escribe el RFC">
+			<input type="text" id="telefono" placeholder="Escribe el número de teléfono">
+			<select id="clasificacion">
+				<option value="Hospital">Hospital</option>
+				<option value="Zapateria">Zapateria</option>
+				<option value="Restaurante">Restaurante</option>
+			</select>
+			<input type="button" id="btnFoto" value="Capturar imagen">
+			<input type="button" id="btnCords" value="Obtener coordenadas">
+			<input type="text" id="latitud" placeholder="Latitud">
+			<input type="text" id="longitud" placeholder="Longitud">
+			<input type="button" id="btnGuardar" value="Guardar">
+		</div>
+		<div data-role="footer">
+			<p>pie de aplicación</p>
+		</div>
+	</div>	
+	<div data-role="page" id="Consultar">
+		<div data-role="header">
+			<p>Consultar servicios</p>
+		</div>	
+		<div data-role="content">
+			<input type="button" id="btnConsultar" value="Consultar todos los servicios">
+			<div id="resConsultaTodos"></div>
+		</div>
+		<div data-role="footer">
+			<p>pie de aplicación</p>
+		</div>
+	</div>	
+</body>
+</html>
